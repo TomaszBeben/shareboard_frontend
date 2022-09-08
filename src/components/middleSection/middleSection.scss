@@ -1,0 +1,9 @@
+.middle-section-wrapper {
+    border: 1px solid black;
+    width: inherit;
+    height: inherit;
+    display: flex;
+    @media only screen and (min-width: 1200px) {
+        width: 1200px;
+    }
+}

@@ -1,0 +1,8 @@
+.footer {
+    border: 1px solid black;
+    width: inherit;
+    height: 5%;
+    @media only screen and (min-width: 1200px) {
+        width: 1200px;
+    }
+}

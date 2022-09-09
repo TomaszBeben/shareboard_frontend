@@ -1,4 +1,4 @@
-import React from 'react'
+import './content.scss'
 
 const Content = () => {
   return (

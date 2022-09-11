@@ -2,7 +2,9 @@ import './content.scss'
 
 const Content = () => {
   return (
-    <div className='content'>Content</div>
+    <div className='content'>
+      Content
+    </div>
   )
 }
 

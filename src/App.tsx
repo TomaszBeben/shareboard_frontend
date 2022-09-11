@@ -1,4 +1,3 @@
-import './App.scss'
 import Header from './components/header/Header'
 import Sidebar from './components/middleSection/sidebar/Sidebar';
 import Content from './components/middleSection/content/Content';

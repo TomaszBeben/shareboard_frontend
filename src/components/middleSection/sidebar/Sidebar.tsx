@@ -1,6 +1,17 @@
+import { Link } from 'react-router-dom'
+
 import './sidebar.scss'
 
-const fakeTab: string[] = ['1','2','3']
+const fakeTab = [
+  {
+    name: 'test1',
+    link:  '/test1'
+  },
+  {
+    name: 'test2',
+    link: 'test2'
+  }
+]
 
 const Sidebar = () => {
   return (
@@ -8,7 +19,11 @@ const Sidebar = () => {
       {
         fakeTab.map(e => {
           return (
-            <div>{e}</div>
+            <div>
+              <Link to={e.link}>
+              {e.name}
+            </Link>
+            </div>
           )
         })
       }

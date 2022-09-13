@@ -6,14 +6,14 @@ import Footer from './components/footer/Footer';
 
 function App() {
   return (
-    <div className='App'>
+    <>
       <Header/>
       <div className='middle-section-wrapper'>
         <Sidebar/>
         <Content/>
       </div>
       <Footer/>
-    </div>
+    </>
   );
 }
 

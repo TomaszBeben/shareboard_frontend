@@ -5,7 +5,7 @@ import './sidebar.scss'
 const fakeTab = [
   {
     name: 'test1',
-    link:  '/test1'
+    link:  'test1'
   },
   {
     name: 'test2',
@@ -19,7 +19,7 @@ const Sidebar = () => {
       {
         fakeTab.map(e => {
           return (
-            <div>
+            <div key={e.link}>
               <Link to={e.link}>
               {e.name}
             </Link>

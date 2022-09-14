@@ -2,7 +2,18 @@
     border: 1px solid black;
     width: inherit;
     height: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     @media only screen and (min-width: 1200px) {
         width: 1200px;
     }
+}
+
+.logo-wrapper {
+    padding: 1rem;
+}
+
+.header-nav-wrapper>* {
+    padding-right: 1rem;
 }

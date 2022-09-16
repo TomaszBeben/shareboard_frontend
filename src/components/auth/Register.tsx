@@ -1,8 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 
 const Register = () => {
 
-  const [formData, setFormData] = useState({
+  type Tcredentials = {
+    name: string,
+    email: string,
+    password: string,
+    password2: string,
+  }
+
+  const [formData, setFormData] = useState<Tcredentials>({
     name: '',
     email: '',
     password: '',
@@ -11,14 +18,14 @@ const Register = () => {
 
   const { name, email, password, password2 } = formData
 
-  const onChange = (e: any) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value
     }))
   }
 
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log(formData)
   }
@@ -70,7 +77,7 @@ const Register = () => {
               onChange={onChange}
             />
           </div>
-          <div style={{border: '1px solid red', display: 'flex', justifyContent:'center'}}>
+          <div>
             <button type='submit'>Submit</button>
           </div>
         </form>

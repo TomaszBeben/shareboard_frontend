@@ -1,6 +1,7 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { register, reset } from '../../store/authSlice'
 
 const Register = () => {
 
@@ -20,6 +21,13 @@ const Register = () => {
 
   const { name, email, password, password2 } = formData
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch<any>()
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state: TinitialState) => state.auth
+  )
+
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -29,7 +37,16 @@ const Register = () => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(formData)
+    
+    if (password !== password2) {
+      console.log('Password do not match')
+    }else{
+      const userData = {
+        name, email, password
+      }
+
+      dispatch(register())// to fix
+    }
   }
 
   return (

@@ -6,3 +6,5 @@ export const store = configureStore({
     auth: authSlice,
   }
 })
+
+export type AppDispatch = typeof store.dispatch

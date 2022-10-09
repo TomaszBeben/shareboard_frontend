@@ -24,13 +24,17 @@ const initialState: TinitialState = {
 }
 
 //Register User
-
+export type TuserData = {
+  name: string;
+  email: string;
+  password: string;
+}
 export const register = createAsyncThunk(
   'auth/register',
-  async (user, thunkAPI) => {
+  async (user?: TuserData, thunkAPI?) => {
     try {
       return await authFetch.register(user)
-    } catch (error:any) {
+    } catch (error: any) {
       const message =
         (error.response &&
           error.response.data &&

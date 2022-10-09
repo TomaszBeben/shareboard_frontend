@@ -1,7 +1,9 @@
+import { AnyAction, Dispatch} from '@reduxjs/toolkit'
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { register, reset } from '../../store/authSlice'
+import { register, reset, TuserData } from '../../store/authSlice'
+import { AppDispatch } from '../../store/store'
 
 const Register = () => {
 
@@ -22,11 +24,24 @@ const Register = () => {
   const { name, email, password, password2 } = formData
 
   const navigate = useNavigate()
-  const dispatch = useDispatch<any>()
+  const dispatch = useDispatch<AppDispatch>()
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state: TinitialState) => state.auth
   )
+
+  useEffect(() => {
+    if(isError) {
+      console.log(message);
+    }
+
+    if(isSuccess || user) {
+      navigate('/')
+    }
+
+    dispatch(reset())
+
+  }, [user, isError, isSuccess, message, navigate, dispatch])
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
@@ -37,15 +52,15 @@ const Register = () => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
+
     if (password !== password2) {
       console.log('Password do not match')
     }else{
-      const userData = {
+      const userData: TuserData = {
         name, email, password
       }
 
-      dispatch(register())// to fix
+      dispatch(register(userData))
     }
   }
 

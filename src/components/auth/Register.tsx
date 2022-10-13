@@ -64,6 +64,13 @@ const Register = () => {
     }
   }
 
+  //loading screen if 'loading'
+  if(isLoading){
+    return(
+      <h1>LOADING...</h1>
+    )
+  }
+
   return (
     <div>
       <h1>Register</h1>

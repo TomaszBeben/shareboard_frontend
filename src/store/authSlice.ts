@@ -12,7 +12,6 @@ type TinitialState = {
   message: string |any
 }
 
-// const user: Tuser  = JSON.parse(localStorage.getItem('user') || 'user')
 const user: Tuser  = localStorage.getItem('user')
 
 const initialState: TinitialState = {
@@ -45,6 +44,12 @@ export const register = createAsyncThunk(
     }
   }
 )
+//temporary any type
+export const logout:any = createAsyncThunk('auth/logout', 
+async () => {
+  await authFetch.logout()
+}
+)
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -71,6 +76,9 @@ export const authSlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.message = action.payload
+        state.user = null
+      })
+      .addCase(logout.fulfilled, (state) => {
         state.user = null
       })
   }

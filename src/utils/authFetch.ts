@@ -13,8 +13,14 @@ const register = async(userData: any) => {
   return response.data
 }
 
+//logout user
+const logout = () => {
+  localStorage.removeItem('user')
+}
+
 const authFetch = {
   register,
+  logout,
 }
 
 export default authFetch

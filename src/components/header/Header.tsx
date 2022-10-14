@@ -26,9 +26,10 @@ const Header = () => {
       <div className='header-nav-wrapper'>
         {user ? (
           <>
-          <button onClick={onLogout}>
-            Logout
-          </button>
+            <button onClick={onLogout}>
+              Logout
+            </button>
+            <button>USER</button>
           </>
         ) : (
           <>
@@ -36,8 +37,6 @@ const Header = () => {
             <Link to='register'>Register</Link>
           </>
         )}
-
-        <button>USER</button>
       </div>
     </div>
   )

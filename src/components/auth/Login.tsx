@@ -1,4 +1,9 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { login, reset, TuserData } from '../../store/authSlice'
+import { AnyAction, Dispatch } from '@reduxjs/toolkit'
+import { AppDispatch } from '../../store/store'
 
 const Login = () => {
 
@@ -14,6 +19,26 @@ const Login = () => {
 
   const { email, password } = formData
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch<AppDispatch>()
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state: TinitialState) => state.auth
+  )
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
+    if (isSuccess || user) {
+      navigate('/')
+    }
+
+    dispatch(reset())
+
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -23,7 +48,19 @@ const Login = () => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(formData)
+    const userData = {
+      email,
+      password
+    }
+
+    dispatch(login(userData))
+  }
+
+  //loading screen if 'loading'
+  if (isLoading) {
+    return (
+      <h1>LOADING...</h1>
+    )
   }
 
   return (

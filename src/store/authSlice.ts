@@ -24,7 +24,7 @@ const initialState: TinitialState = {
 
 //Register User
 export type TuserData = {
-  name: string;
+  name?: string;
   email: string;
   password: string;
 }
@@ -44,6 +44,25 @@ export const register = createAsyncThunk(
     }
   }
 )
+
+//Login User
+export const login = createAsyncThunk(
+  'auth/login',
+  async (user?: TuserData, thunkAPI?) => {
+    try {
+      return await authFetch.login(user)
+    } catch (error: any) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 //temporary any type
 export const logout:any = createAsyncThunk('auth/logout', 
 async () => {
@@ -73,6 +92,20 @@ export const authSlice = createSlice({
         state.user = action.payload
       })
       .addCase(register.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.user = null
+      })
+      .addCase(login.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.user = action.payload
+      })
+      .addCase(login.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
